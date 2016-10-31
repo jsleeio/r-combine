@@ -31,10 +31,11 @@ sub r_combine {
 my %CONFIG = (
   stockfile => 'r-combine.stock',
   tolerance => 0.01,
+  verbose => 0
 );
 
-GetOptions(\%CONFIG, qw(stockfile=s tolerance=f))
-  or die "usage: r-combine.pl [--stockfile=filename] [--tolerance=0.01]\n";
+GetOptions(\%CONFIG, qw(stockfile=s tolerance=f verbose))
+  or die "usage: r-combine.pl [--stockfile=filename] [--tolerance=0.01] [--verbose]\n";
 
 my @stock = read_stock($CONFIG{stockfile});
 
@@ -53,7 +54,7 @@ DESIRED: for my $r_desired (map { from_si($_) } @ARGV) {
           $r_desired, $r1, $r2, $rc;
       } else {
         printf "r-desired %d reject r1 %s r2 %s result %d\n",
-          $r_desired, $r1, $r2, $rc;
+          $r_desired, $r1, $r2, $rc if $CONFIG{verbose}
       }
     }
   }
