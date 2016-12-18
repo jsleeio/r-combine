@@ -51,7 +51,7 @@ DESIRED: for my $r_desired (map { from_si($_) } @ARGV) {
       my $rc = r_combine($r1, $r2);
       if ($rc >= $r_lower && $rc <= $r_upper) {
         printf "r-desired %d candidate r1 %s r2 %s result %d\n",
-          $r_desired, $r1, $r2, $rc;
+          $r_desired, sort($r1, $r2), $rc;
       } else {
         printf "r-desired %d reject r1 %s r2 %s result %d\n",
           $r_desired, $r1, $r2, $rc if $CONFIG{verbose}
